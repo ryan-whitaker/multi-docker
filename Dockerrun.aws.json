@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVErsion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "cwhitaker/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "cwhitaker/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "cwhitaker/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "cwhitaker/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 90,
+                    "conmtainerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+        
+    ]
+}
